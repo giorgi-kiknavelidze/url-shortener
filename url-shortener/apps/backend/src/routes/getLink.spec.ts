@@ -1,15 +1,14 @@
 import express from "express";
 import supertest from "supertest";
-import sinon from "sinon";
 import { getLink } from "./getLink";
 import { LinksService } from "../services";
 
 describe("GET /getLink", () => {
-  afterEach(() => sinon.restore());
+  afterEach(() => jest.restoreAllMocks());
 
   it("should respond with correct shortId", async () => {
     const linksService = new LinksService();
-    sinon.stub(linksService, "getLink").returns(Promise.resolve("example.com"));
+    jest.spyOn(linksService, "getLink").mockClear().mockReturnValue(Promise.resolve("example.com"));
     const app = express();
     app.use(getLink(linksService));
     const res = await supertest(app).get("/getLink/100");

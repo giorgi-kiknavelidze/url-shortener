@@ -1,8 +1,8 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
-import { LinksService } from "./linksService";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import { LinksService } from './linksService';
 
-describe("LinksService", () => {
+describe('LinksService', () => {
   let mongoServer: MongoMemoryServer = new MongoMemoryServer();
   let linksService: LinksService = new LinksService();
 
@@ -17,15 +17,15 @@ describe("LinksService", () => {
     await mongoServer.stop();
   });
 
-  describe("getLink", () => {
-    it("should return null for non-existent link", async () => {
+  describe('getLink', () => {
+    it('should return null for non-existent link', async () => {
       expect(await linksService.getLink(1)).toBeNull();
     });
   });
 
-  describe("addLink", () => {
-    it("should add the link and make it retriveable", async () => {
-      const link = "https://example.com";
+  describe('addLink', () => {
+    it('should add the link and make it retriveable', async () => {
+      const link = 'https://example.com';
       const { shortId } = await linksService.addLink(link);
       expect(shortId).toBeDefined();
       expect(await linksService.getLink(shortId!)).toBe(link);

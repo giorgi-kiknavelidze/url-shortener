@@ -1,15 +1,14 @@
 import express from "express";
 import supertest from "supertest";
-import sinon from "sinon";
 import { addLink } from "./addLink";
 import { LinksService } from "../services";
 
 describe("POST /addLink", () => {
-  afterEach(() => sinon.restore());
+  afterEach(() => jest.restoreAllMocks());
 
   it("should respond with correct shortId", async () => {
     const linksService = new LinksService();
-    sinon.stub(linksService, "addLink").returns(
+    jest.spyOn(linksService, "addLink").mockClear().mockReturnValue(
       Promise.resolve({
         url: "example",
         shortId: 100,
