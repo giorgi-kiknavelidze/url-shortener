@@ -1,5 +1,4 @@
 import express from "express";
-import { expect } from "chai";
 import supertest from "supertest";
 import sinon from "sinon";
 import { addLink } from "./addLink";
@@ -21,18 +20,21 @@ describe("POST /addLink", () => {
     const res = await supertest(app)
       .post("/addLink")
       .send({ link: "example.com" });
-    expect(res.statusCode).to.equal(200);
-    expect(res.body.status).to.equal("success");
-    expect(res.body.shortId).to.equal(100);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.status).toBe("success");
+    expect(res.body.shortId).toBe(100);
   });
 
-  it("should respond with BODY_VALIDATION_FAIL error if invalid input is provided", async () => {
-    const app = express();
-    app.use(express.json());
-    app.use(addLink(new LinksService()));
-    const res = await supertest(app).post("/addLink").send({ link: "invalid" });
-    expect(res.statusCode).to.equal(422);
-    expect(res.body.status).to.equal("error");
-    expect(res.body.error).to.equal("BODY_VALIDATION_FAIL");
-  });
+  it(
+    "should respond with BODY_VALIDATION_FAIL error if invalid input is provided",
+    async () => {
+      const app = express();
+      app.use(express.json());
+      app.use(addLink(new LinksService()));
+      const res = await supertest(app).post("/addLink").send({ link: "invalid" });
+      expect(res.statusCode).toBe(422);
+      expect(res.body.status).toBe("error");
+      expect(res.body.error).toBe("BODY_VALIDATION_FAIL");
+    }
+  );
 });

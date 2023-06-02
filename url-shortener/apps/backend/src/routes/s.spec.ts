@@ -1,5 +1,4 @@
 import express from "express";
-import { expect } from "chai";
 import supertest from "supertest";
 import sinon from "sinon";
 import { s } from "./s";
@@ -16,16 +15,19 @@ describe("GET /s", () => {
     const app = express();
     app.use(s(linksService));
     const res = await supertest(app).get("/s/32");
-    expect(res.statusCode).to.equal(307);
-    expect(res.header.location).to.equal("https://example.com");
+    expect(res.statusCode).toBe(307);
+    expect(res.header.location).toBe("https://example.com");
   });
 
-  it("should respond with PARAMS_VALIDATION_FAIL error if invalid input is provided", async () => {
-    const app = express();
-    app.use(s(new LinksService()));
-    const res = await supertest(app).get("/s/example");
-    expect(res.statusCode).to.equal(422);
-    expect(res.body.status).to.equal("error");
-    expect(res.body.error).to.equal("PARAMS_VALIDATION_FAIL");
-  });
+  it(
+    "should respond with PARAMS_VALIDATION_FAIL error if invalid input is provided",
+    async () => {
+      const app = express();
+      app.use(s(new LinksService()));
+      const res = await supertest(app).get("/s/example");
+      expect(res.statusCode).toBe(422);
+      expect(res.body.status).toBe("error");
+      expect(res.body.error).toBe("PARAMS_VALIDATION_FAIL");
+    }
+  );
 });
