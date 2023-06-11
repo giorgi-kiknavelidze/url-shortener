@@ -1,12 +1,10 @@
-import crypto from "crypto";
-import { Link } from "../models";
-import { MAX_SHORT_ID } from "../constants";
+import crypto from 'crypto';
+import { Link } from '../models';
+import { MAX_SHORT_ID } from '../constants';
 
 export class LinksService {
-  constructor() {}
-
   public async addLink(url: string) {
-    while (true) {
+    for (;;) {
       try {
         const shortId = crypto.randomInt(0, MAX_SHORT_ID + 1);
         const dbResult = await Link.findOneAndUpdate(
@@ -19,9 +17,9 @@ export class LinksService {
         if (
           !(
             err instanceof Error &&
-            err.name === "MongoServerError" &&
-            "code" in err &&
-            err["code"] === 11000
+            err.name === 'MongoServerError' &&
+            'code' in err &&
+            err['code'] === 11000
           )
         )
           throw err;

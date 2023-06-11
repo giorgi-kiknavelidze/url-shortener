@@ -1,5 +1,5 @@
-import { isNumberString, IsNumber, IsInt, Min, Max } from "class-validator";
-import { MAX_SHORT_ID } from "../../constants";
+import { isNumberString, IsNumber, IsInt, Min, Max } from 'class-validator';
+import { MAX_SHORT_ID } from '../../constants';
 
 export class GetLinkParams {
   @IsNumber()
@@ -8,7 +8,7 @@ export class GetLinkParams {
   @Max(MAX_SHORT_ID)
   readonly shortId: number;
 
-  constructor(params: any) {
+  constructor(params: { shortId: string }) {
     this.shortId = isNumberString(params.shortId) ? Number(params.shortId) : -1;
   }
 }

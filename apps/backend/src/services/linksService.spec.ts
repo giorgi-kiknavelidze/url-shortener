@@ -4,7 +4,7 @@ import { LinksService } from './linksService';
 
 describe('LinksService', () => {
   let mongoServer: MongoMemoryServer = new MongoMemoryServer();
-  let linksService: LinksService = new LinksService();
+  const linksService: LinksService = new LinksService();
 
   beforeEach(async () => {
     mongoServer = await MongoMemoryServer.create();
@@ -28,7 +28,7 @@ describe('LinksService', () => {
       const link = 'https://example.com';
       const { shortId } = await linksService.addLink(link);
       expect(shortId).toBeDefined();
-      expect(await linksService.getLink(shortId!)).toBe(link);
+      expect(await linksService.getLink(shortId ?? 0)).toBe(link);
     });
   });
 });
