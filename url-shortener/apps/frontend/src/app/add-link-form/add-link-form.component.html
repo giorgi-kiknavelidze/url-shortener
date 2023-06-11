@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-2 items-center justify-center">
+  <form
+    class="flex items-baseline justify-center gap-8 px-8 py-4 bg-slate-900"
+    (ngSubmit)="onSubmit()"
+  >
+    <input
+      type="url"
+      [ngClass]="{
+        'placeholder:text-slate-300 w-full sm:w-[400px] py-2 px-2': true,
+        'text-slate-500 outline-slate-700': !isErrored,
+        'text-red-500 outline-red-700': isErrored
+        }"
+      placeholder="Shorten link"
+      [formControl]="linkInput"
+      (input)="onLinkInputChange()"
+    />
+    <button
+      type="submit"
+      [disabled]="isLoading || isErrored"
+      [ngClass]="{'bg-slate-700 text-white w-[120px] py-2': true, 'cursor-not-allowed': isErrored}"
+    >
+      {{buttonLabel}}
+    </button>
+  </form>
+  <p class="text-red-500" *ngIf="shouldTryAgain">
+    Something went wrong, Please try again later
+  </p>
+</div>
