@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class IdEncoderService {
   private alphabet = '23456789CFGHJMPQRVWXcfghjmpqrvwx';
-  constructor() {}
 
   encode(id: bigint) {
     let reverseEncoded = '';

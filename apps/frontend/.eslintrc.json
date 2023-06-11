@@ -9,7 +9,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "urlShortener",
+            "prefix": "app",
             "style": "camelCase"
           }
         ],
@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "url-shortener",
+            "prefix": "app",
             "style": "kebab-case"
           }
         ]

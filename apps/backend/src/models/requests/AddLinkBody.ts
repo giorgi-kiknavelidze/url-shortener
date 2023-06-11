@@ -1,10 +1,10 @@
-import { IsString, IsUrl } from "class-validator";
+import { IsString, IsUrl } from 'class-validator';
 
 export class AddLinkBody {
   @IsString()
   @IsUrl()
   readonly link: string;
-  constructor(body: any) {
+  constructor(body: { link: string }) {
     this.link = body.link;
   }
 }
